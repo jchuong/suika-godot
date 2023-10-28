@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://chd44etbhxngo"]
+
+[ext_resource type="PackedScene" uid="uid://d07xifqbcanwx" path="res://scenes/fruit/fruit.tscn" id="1_el4kf"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_l2xx4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jiay"]
+size = Vector2(551.75, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avbkk"]
+size = Vector2(28, 1023.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1k8w"]
+size = Vector2(43, 1027)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_l2xx4")
+fruit_scene = ExtResource("1_el4kf")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Ground" type="Sprite2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="Ground"]
+position = Vector2(11, 257)
+collision_layer = 1024
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground"]
+position = Vector2(259, 723)
+shape = SubResource("RectangleShape2D_8jiay")
+
+[node name="Right" type="Sprite2D" parent="."]
+
+[node name="Right" type="StaticBody2D" parent="Right"]
+position = Vector2(273, 251)
+collision_layer = 1025
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right/Right"]
+position = Vector2(247, 259)
+shape = SubResource("RectangleShape2D_avbkk")
+
+[node name="Left" type="Sprite2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Left"]
+position = Vector2(522, 474)
+collision_layer = 1025
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left/StaticBody2D"]
+position = Vector2(-499, 37)
+shape = SubResource("RectangleShape2D_c1k8w")
+
+[connection signal="timeout" from="Timer" to="." method="start"]

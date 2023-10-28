@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://d07xifqbcanwx"]
+
+[ext_resource type="Script" path="res://scenes/fruit/fruit.gd" id="1_xv2u1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_648fq"]
+radius = 30.0
+
+[sub_resource type="Gradient" id="Gradient_id5lv"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.76824, 1)
+colors = PackedColorArray(0.846273, 0.0989216, 0.419954, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_38jjn"]
+gradient = SubResource("Gradient_id5lv")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
+
+[node name="Fruit" type="RigidBody2D"]
+position = Vector2(14, 12)
+collision_mask = 1025
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("1_xv2u1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(65, 24)
+shape = SubResource("CircleShape2D_648fq")
+debug_color = Color(0.239216, 0.568627, 0.768627, 0.929412)
+metadata/_edit_group_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(11, -11)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(65, 24)
+texture = SubResource("GradientTexture2D_38jjn")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 47.0
+offset_top = 12.0
+offset_right = 87.0
+offset_bottom = 38.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
