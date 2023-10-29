@@ -1,16 +1,20 @@
 extends Node
-@export var fruit_scene: PackedScene
+
+var fruit_factory_scene = preload("res://scenes/fruit_factory/fruit_factory.tscn")
+var fruit_factory
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	fruit_factory = fruit_factory_scene.instantiate()
+	add_child(fruit_factory)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+func start_game():
+	$Timer.start()
 
 func start():
-	var fruit = fruit_scene.instantiate()
-	fruit.position = Vector2(randf_range(10.0, 400), 0)
-	add_child(fruit)
+	fruit_factory.generate_fruit()

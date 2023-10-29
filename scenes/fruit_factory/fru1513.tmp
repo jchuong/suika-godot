@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqg1wom0ybbiu"]
+
+[ext_resource type="Script" path="res://scenes/fruit_factory/fruit_factory.gd" id="1_4mpr5"]
+[ext_resource type="PackedScene" uid="uid://d07xifqbcanwx" path="res://scenes/fruit/fruit.tscn" id="2_7rj0r"]
+
+[node name="FruitFactory" type="Node"]
+editor_description = "Generates random fruit to drop and manages the queue."
+script = ExtResource("1_4mpr5")
+fruit_scene = ExtResource("2_7rj0r")

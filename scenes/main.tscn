@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://chd44etbhxngo"]
+[gd_scene load_steps=5 format=3 uid="uid://chd44etbhxngo"]
 
-[ext_resource type="PackedScene" uid="uid://d07xifqbcanwx" path="res://scenes/fruit/fruit.tscn" id="1_el4kf"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_l2xx4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jiay"]
@@ -14,10 +13,12 @@ size = Vector2(43, 1027)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_l2xx4")
-fruit_scene = ExtResource("1_el4kf")
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="Ground" type="Sprite2D" parent="."]
 
@@ -52,4 +53,5 @@ collision_mask = 1024
 position = Vector2(-499, 37)
 shape = SubResource("RectangleShape2D_c1k8w")
 
+[connection signal="timeout" from="StartTimer" to="." method="start_game"]
 [connection signal="timeout" from="Timer" to="." method="start"]
