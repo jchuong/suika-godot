@@ -4,17 +4,13 @@ var size : int = 1:
 	set(value):
 		size = value
 		$Label.text = str(value)
-		$CollisionShape2D.scale = Vector2(size, size)
-		$Sprite2D.scale = Vector2(size, size)
-
-
-func _setMask():
-	for i in 9:
-		set_collision_layer_value(i + 1, i == size)
-		set_collision_mask_value(i + 1, i == size)
+		var scale = Vector2(1 + (size - 1) * 0.1, 1 + (size - 1) * 0.1)
+		$CollisionShape2D.scale = scale
+		$Sprite2D.scale = scale
 
 
 func _ready():
+	add_to_group('fruits')
 	show()
 
 
@@ -31,7 +27,7 @@ func remove():
 
 
 func _on_body_entered(body):
-	if (body is RigidBody2D && body.size == size):
+	if (body.is_in_group('fruits') && body.size == size):
 		var newSize = size + 1
 		newSize = clamp(newSize, 1, 6)
 		size = newSize
